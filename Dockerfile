@@ -8,7 +8,7 @@ ENV ANDROID_HOME "/opt/android/sdk"
 ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
 # Install required dependencies
-RUN apk add --no-cache --virtual=.build-dependencies wget unzip ca-certificates bash
+RUN apk add --no-cache wget unzip curl git openssl openssh-client ca-certificates bash
 
 # Download and extract Android Tools
 RUN wget http://dl.google.com/android/repository/sdk-tools-linux-${SDK_TOOLS}.zip -O /tmp/tools.zip && \
@@ -27,5 +27,6 @@ RUN yes | sdkmanager \
   "platform-tools" \
   "build-tools;28.0.3" \
   "extras;android;m2repository" \
-  "platforms;android-28"
+  "platforms;android-28" \
+  "extras;google;m2repository"
 
